@@ -1,0 +1,20 @@
+# Maven
+/target/
+/*.iml
+
+# IntelliJ
+/.idea/workspace.xml
+/.idea/tasks.xml
+/.idea/dictionaries
+/.idea/libraries
+/out/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# WireMock
+# (do NOT commit your WireMock JAR, it’s better to download separately or include via Maven if possible)
