@@ -1,20 +1,58 @@
+# -------------------------------
 # Maven
+# -------------------------------
 /target/
-/*.iml
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
 
-# IntelliJ
+# -------------------------------
+# IntelliJ IDEA
+# -------------------------------
+# User-specific files
 /.idea/workspace.xml
 /.idea/tasks.xml
 /.idea/dictionaries
 /.idea/libraries
 /out/
 
-# Logs
-*.log
+# Project files
+*.iml
+*.iws
 
-# OS files
+# -------------------------------
+# OS Files
+# -------------------------------
 .DS_Store
 Thumbs.db
 
-# WireMock
-# (do NOT commit your WireMock JAR, it’s better to download separately or include via Maven if possible)
+# -------------------------------
+# Logs
+# -------------------------------
+*.log
+
+# -------------------------------
+# WireMock / External binaries
+# -------------------------------
+# Do NOT commit wiremock JAR; keep it local
+*.jar
+
+# -------------------------------
+# Test Reports / Temporary files
+# -------------------------------
+/target/surefire-reports/
+/target/failsafe-reports/
+/target/cucumber-reports/
+/target/*.tmp
+
+# -------------------------------
+# Environment / Credentials
+# -------------------------------
+# Keep real passwords out of Git
+config.properties
+.env
