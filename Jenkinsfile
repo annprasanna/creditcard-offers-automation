@@ -1,10 +1,11 @@
 pipeline {
     agent any
 
-    tools {
-        jdk 'JDK21'        // Must match your Jenkins JDK config
-        maven 'Maven3'     // Must match your Jenkins Maven config
-    }
+    // Commented out tools if you don't have JDK11 in Jenkins
+    // tools {
+    //     jdk 'JDK11'
+    //     maven 'Maven3'
+    // }
 
     environment {
         WIREMOCK_PORT = 8080
@@ -28,6 +29,7 @@ pipeline {
 
         stage('Start WireMock') {
             steps {
+                echo "Starting WireMock on port ${env.WIREMOCK_PORT}"
                 bat """
                 start cmd /c java -jar ${env.WIREMOCK_JAR} --port ${env.WIREMOCK_PORT}
                 timeout /t 5
@@ -37,6 +39,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
+                echo "Running TestNG + Cucumber Tests"
                 bat 'mvn test'
             }
         }
@@ -44,8 +47,9 @@ pipeline {
 
     post {
         always {
-            // Collect test reports
+            // Publish both TestNG and Cucumber reports
             junit '**/target/surefire-reports/*.xml'
+            junit '**/target/surefire-reports/Cucumber.xml'
         }
     }
 }
