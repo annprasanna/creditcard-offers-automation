@@ -49,7 +49,7 @@ pipeline {
         always {
             // Publish both TestNG and Cucumber reports
             junit '**/target/surefire-reports/*.xml'
-            junit '**/target/surefire-reports/Cucumber.xml'
+
         }
     }
 }
