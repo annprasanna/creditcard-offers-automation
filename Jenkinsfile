@@ -32,7 +32,7 @@ pipeline {
                 echo "Starting WireMock on port ${env.WIREMOCK_PORT}"
                 bat """
                 start cmd /c java -jar ${env.WIREMOCK_JAR} --port ${env.WIREMOCK_PORT}
-                timeout /t 5
+                powershell -Command "Start-Sleep -Seconds 5"
                 """
             }
         }
