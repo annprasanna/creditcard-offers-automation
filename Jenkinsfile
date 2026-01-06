@@ -2,10 +2,10 @@ pipeline {
     agent any
 
     // Commented out tools if you don't have JDK11 in Jenkins
-    // tools {
-    //     jdk 'JDK11'
-    //     maven 'Maven3'
-    // }
+     tools {
+         jdk 'JDK21'
+         maven 'Maven3'
+     }
 
     environment {
         WIREMOCK_PORT = 8080
