@@ -1,23 +1,33 @@
 package com.bank.automation.utils;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class DBUtil {
 
-    public static ResultSet getOffer(String offerId) throws Exception {
+    public static String getCardTypeByEligibility(String eligibility) {
 
-        Connection con = DriverManager.getConnection(
-                "jdbc:sqlserver://localhost\\SQLEXPRESS:1433;databaseName=BankingDB",
+        String cardType = null;
+
+        try (Connection con = DriverManager.getConnection(
+                "jdbc:sqlserver://localhost:1433;databaseName=BankingDB;encrypt=false",
                 "sa",
-                "password"
-        );
+                "password")) {
 
-        Statement stmt = con.createStatement();
-        return stmt.executeQuery(
-                "SELECT * FROM CreditCardOffers WHERE OfferId='" + offerId + "'"
-        );
+            PreparedStatement ps = con.prepareStatement(
+                    "SELECT CardType FROM CreditCardOffers WHERE Eligibility = ?");
+
+            ps.setString(1, eligibility);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                cardType = rs.getString("CardType");
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("DB validation failed", e);
+        }
+
+        return cardType;
     }
 }

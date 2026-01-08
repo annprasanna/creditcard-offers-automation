@@ -1,12 +1,14 @@
 package com.bank.automation.ui;
 
-import org.testng.annotations.Test;
 import com.bank.automation.base.BaseTest;
+import com.bank.automation.utils.ScenarioContext;
 
 public class CreditCardOffersUITest extends BaseTest {
 
-    @Test
-    public void openBankingDemoSite() {
-        driver.get("https://demo.opencart.com");
+    public void openOffersPageWithSession() {
+
+        String token = ScenarioContext.getAccessToken();
+
+        getDriver().get("https://demo.opencart.com?access_token=" + token);
     }
 }

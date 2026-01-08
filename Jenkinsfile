@@ -37,10 +37,21 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
+        /*stage('Run Tests') {
             steps {
                 echo "Running TestNG + Cucumber Tests"
                 bat 'mvn test'
+            }
+        }*/
+        stage('API Tests') {
+            steps {
+                bat 'mvn test -D cucumber.filter.tags="@api"'
+            }
+        }
+
+        stage('UI Tests') {
+            steps {
+                bat 'mvn test -D cucumber.filter.tags="@ui"'
             }
         }
     }

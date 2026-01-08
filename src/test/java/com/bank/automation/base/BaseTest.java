@@ -2,23 +2,23 @@ package com.bank.automation.base;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
 
-    protected WebDriver driver;
+    protected static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    @BeforeMethod
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+    public void initDriver() {
+        driver.set(new ChromeDriver());
     }
 
-    @AfterMethod
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
+    public WebDriver getDriver() {
+        return driver.get();
+    }
+
+    public void quitDriver() {
+        if (driver.get() != null) {
+            driver.get().quit();
+            driver.remove();
         }
     }
 }
